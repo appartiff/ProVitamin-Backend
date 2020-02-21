@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tita-Api", "Tita-Api\Tita-Api.csproj", "{9149E423-55AD-4687-953A-A8853E23AA9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPA", "..\Tita-website\SPA.csproj", "{13EA875B-BB00-4E31-ACF5-6E03D8BEC908}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9149E423-55AD-4687-953A-A8853E23AA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9149E423-55AD-4687-953A-A8853E23AA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9149E423-55AD-4687-953A-A8853E23AA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9149E423-55AD-4687-953A-A8853E23AA9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13EA875B-BB00-4E31-ACF5-6E03D8BEC908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13EA875B-BB00-4E31-ACF5-6E03D8BEC908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13EA875B-BB00-4E31-ACF5-6E03D8BEC908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13EA875B-BB00-4E31-ACF5-6E03D8BEC908}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
