@@ -26,6 +26,7 @@ obj/
 
 *.suo
 *.user
+*.json
 .vs/
 [Bb]in/
 [Oo]bj/
@@ -35,3 +36,8 @@ _UpgradeReport_Files/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+#File specific
+appsettings.json
+appsettings.Development.json
+

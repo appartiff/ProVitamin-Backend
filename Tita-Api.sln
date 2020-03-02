@@ -3,6 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provitamin.Api", "Provitamin.Api\Provitamin.Api.csproj", "{9149E423-55AD-4687-953A-A8853E23AA9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{35EB914F-DA90-447F-8850-FBD85ADC8E3A}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C9DF4177-19C7-445E-94CB-34BAC17C8879}"
 EndProject

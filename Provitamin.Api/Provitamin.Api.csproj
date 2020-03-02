@@ -11,5 +11,9 @@
       <ProjectReference Include="..\Provitamin.Persistence\Provitamin.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="appsettings.Development.json" />
+    </ItemGroup>
+
 
 </Project>
