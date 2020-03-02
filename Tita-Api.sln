@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provitamin.Domain", "Provit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provitamin.Application", "Provitamin.Application\Provitamin.Application.csproj", "{BFB2B028-B253-4926-BA0F-827C700CAF8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protvitamin.Infrastructure", "Protvitamin.Infrastructure\Protvitamin.Infrastructure.csproj", "{A0C2EE99-5173-41E2-9C0B-9D03ED6D092A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provitamin.Infrastructure", "Provitamin.Infrastructure\Provitamin.Infrastructure.csproj", "{A0C2EE99-5173-41E2-9C0B-9D03ED6D092A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provitamin.Persistence", "Provitamin.Persistence\Provitamin.Persistence.csproj", "{9CFE1455-5852-49B9-BCA5-3F0F09E8E6A9}"
 EndProject
