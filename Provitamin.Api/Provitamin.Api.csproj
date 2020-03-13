@@ -6,13 +6,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Protvitamin.Infrastructure\Protvitamin.Infrastructure.csproj" />
       <ProjectReference Include="..\Provitamin.Application\Provitamin.Application.csproj" />
+      <ProjectReference Include="..\Provitamin.Infrastructure\Provitamin.Infrastructure.csproj" />
       <ProjectReference Include="..\Provitamin.Persistence\Provitamin.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="appsettings.Development.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.2" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.2" />
     </ItemGroup>
 
 
