@@ -6,9 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Provitamin.Application\Provitamin.Application.csproj" />
+      <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\Provitamin.Infrastructure\Provitamin.Infrastructure.csproj" />
-      <ProjectReference Include="..\Provitamin.Persistence\Provitamin.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>

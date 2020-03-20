@@ -1,6 +1,6 @@
-﻿﻿using AutoMapper;
+﻿﻿ using AutoMapper;
 
- namespace Provitamin.Application.Common.Mappings
+  namespace Application.Common.Mappings
 {
     public interface IMapFrom<T>
     {   

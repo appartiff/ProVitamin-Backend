@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
-using Provitamin.Domain.Entities;
+using Domain.Entities.Product;
 
-namespace Provitamin.Application.Common.Interfaces.Repositories
+namespace Application.Common.Interfaces.Repositories
 {
     public interface IProductService
     {

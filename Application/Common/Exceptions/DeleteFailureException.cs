@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Provitamin.Application.Common.Exceptions
+namespace Application.Common.Exceptions
 {
     public class DeleteFailureException : Exception
     {

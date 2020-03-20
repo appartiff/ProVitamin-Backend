@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Common.Interfaces.Repositories;
+using Domain.Entities;
+using Domain.Entities.Product;
 using Microsoft.AspNetCore.Mvc;
-using Provitamin.Application.Common.Interfaces.Repositories;
-using Provitamin.Domain.Entities;
 
 namespace Tita_Api.Api
 {
 
     [Route("api/[controller]/[action]")]
-    public class BooksController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
 
-        public BooksController(IProductService productService)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
         }

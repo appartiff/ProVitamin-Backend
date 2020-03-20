@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Provitamin.Application
+namespace Application
 {
     public static class DependencyInjection
     {
