@@ -18,15 +18,15 @@ namespace Persistence.Repositories
             _products = database.GetCollection<Product>(settings.ProductsCollectionName);
         }
         public async Task<List<Product>> Get() => await _products.FindAsync(book => true).Result.ToListAsync();
-        public async Task<Product> Get(string id) => await _products.FindAsync(book => book.Id == id).Result.FirstOrDefaultAsync();
+        public async Task<Product> Get(string id) => await _products.FindAsync(book => book.Details.Title == id).Result.FirstOrDefaultAsync();
         public Product Create(Product book)
         {
             _products.InsertOne(book);
             return book;
         }
-        public void Update(string id, Product bookIn) => _products.ReplaceOne(book => book.Id == id, bookIn);
+        public void Update(string id, Product bookIn) => _products.ReplaceOne(book => book.Details.Title == id, bookIn);
         
-        public void Remove(Product bookIn) => _products.DeleteOne(book => book.Id == bookIn.Id);
-        public void Remove(string id) => _products.DeleteOne(book => book.Id == id);
+        public void Remove(Product bookIn) => _products.DeleteOne(book => book.Details.Title == bookIn.Details.Title);
+        public void Remove(string id) => _products.DeleteOne(book => book.Details.Title == id);
     }
 }

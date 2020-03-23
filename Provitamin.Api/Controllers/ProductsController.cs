@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces.Repositories;
-using Domain.Entities;
 using Domain.Entities.Product;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Tita_Api.Api
+namespace Tita_Api.Controllers
 {
 
     [Route("api/[controller]/[action]")]
@@ -40,7 +39,7 @@ namespace Tita_Api.Api
         public ActionResult<Product> Create(Product book)
         {
             _productService.Create(book);
-            return CreatedAtRoute("GetBook", new {id = book.Id}, book);
+            return CreatedAtRoute("GetBook", new {id = book.Details.Title}, book);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -67,7 +66,7 @@ namespace Tita_Api.Api
             {
                 return NotFound();
             }
-            _productService.Remove(product.Id);
+            _productService.Remove(product.Details.Title);
             return NoContent();
         }
     }
