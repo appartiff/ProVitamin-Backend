@@ -28,6 +28,7 @@ namespace Persistence
                 sp.GetRequiredService<IOptions<ProvitaminDatabaseSettings>>().Value);
             
             services.AddSingleton<IProductService,ProductService>();
+            services.AddSingleton<IBrandService,BrandService>();
             return services;
         }
     }
