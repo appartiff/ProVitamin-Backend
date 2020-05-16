@@ -17,6 +17,9 @@ namespace Persistence.Repositories
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _brands = database.GetCollection<Brand>(settings.BrandsCollectionName);
+            var notificationLogBuilder = Builders<Brand>.IndexKeys;
+            var indexModel = new CreateIndexModel<Brand>(notificationLogBuilder.Ascending(x => x.Title),new CreateIndexOptions(){Unique = true});
+            _brands.Indexes.CreateOne(indexModel);
         }
         
         public async Task<List<Brand>> Get() => await _brands.FindAsync(brand => true).Result.ToListAsync();
@@ -26,5 +29,6 @@ namespace Persistence.Repositories
             _brands.InsertOne(brand);
             return brand;
         }
+        public void Remove(string title) => _brands.DeleteOne(book => book.Title == title);
     }
 }

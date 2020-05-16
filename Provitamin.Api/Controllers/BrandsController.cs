@@ -32,5 +32,18 @@ namespace Tita_Api.Controllers
             _brandService.Create(brand);
             return CreatedAtAction("Get", new { title = brand.Title}, brand);
         }
+        
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody]Brand brand)
+        {
+            var product = await _brandService.Get(brand.Title);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            _brandService.Remove(brand.Title);
+            return NoContent();
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Application.Common.Interfaces
         Task<List<Brand>> Get();
         Task<Brand> Get(string title);
         Brand Create(Brand brand);
+        void Remove(string title);
     }
 }
