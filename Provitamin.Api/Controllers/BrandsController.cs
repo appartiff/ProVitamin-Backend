@@ -18,19 +18,19 @@ namespace Tita_Api.Controllers
         {
             _brandService = brandService;
         }
-        [HttpGet]
+        [HttpGet(Name ="get")]
         public async Task<ActionResult<List<Brand>>>  Get()
         {
             return await _brandService.Get();
         } 
         
         [HttpPost( Name = "create")]
-        public ActionResult<Brand> Create([FromBody]Brand brand)
+        public async Task<ActionResult<Brand>> Create([FromBody]Brand brand)
         {
             if (string.IsNullOrEmpty(brand.Title) )
                 return BadRequest();
             _brandService.Create(brand);
-            return NoContent();
+            return CreatedAtAction("Get", new { title = brand.Title}, brand);
         }
     }
 }

@@ -23,7 +23,14 @@ namespace Tita_Api
         {
             
 
-            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOriginsPolicy",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
             services.AddControllers();
             services.AddPersistence(Configuration);
             services.AddInfrastructure(Configuration);
@@ -41,7 +48,7 @@ namespace Tita_Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("AllowAllOriginsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
