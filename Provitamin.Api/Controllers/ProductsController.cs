@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces.Repositories;
 using Domain.Entities.Product;
@@ -36,10 +37,12 @@ namespace Tita_Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Product> Create(Product book)
+        public ActionResult<Product> Create([FromBody]Product book)
         {
+            if (string.IsNullOrEmpty(book.Sku) )
+                return BadRequest();
             _productService.Create(book);
-            return CreatedAtRoute("GetBook", new {id = book.Details.Title}, book);
+            return CreatedAtAction("Get", new {id = book.Details.Title}, book);
         }
 
         [HttpPut("{id:length(24)}")]

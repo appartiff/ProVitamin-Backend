@@ -16,7 +16,11 @@ namespace Persistence.Repositories
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _products = database.GetCollection<Product>(settings.ProductsCollectionName);
+            var notificationLogBuilder = Builders<Product>.IndexKeys;
+            var indexModel = new CreateIndexModel<Product>(notificationLogBuilder.Ascending(x => x.Sku),new CreateIndexOptions(){Unique = true});
+            _products.Indexes.CreateOne(indexModel);
         }
+        
         public async Task<List<Product>> Get() => await _products.FindAsync(book => true).Result.ToListAsync();
         public async Task<Product> Get(string id) => await _products.FindAsync(book => book.Details.Title == id).Result.FirstOrDefaultAsync();
         public Product Create(Product book)
