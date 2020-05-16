@@ -11,23 +11,23 @@ namespace Tita_Api.Controllers
     [Route("api/[controller]/[action]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductService _productService;
+        private readonly IProductRepository _productRepository;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductRepository productRepository)
         {
-            _productService = productService;
+            _productRepository = productRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>>  Get()
         {
-           return await _productService.Get();
+           return await _productRepository.Get();
         } 
 
         [HttpGet("{id:length(24)}", Name = "GetProducts")]
         public async Task<ActionResult<Product>> Get(string id)
         {
-            var product = await _productService.Get(id);
+            var product = await _productRepository.Get(id);
 
             if (product == null)
             {
@@ -41,21 +41,21 @@ namespace Tita_Api.Controllers
         {
             if (string.IsNullOrEmpty(book.Sku) )
                 return BadRequest();
-            _productService.Create(book);
+            _productRepository.Create(book);
             return CreatedAtAction("Get", new {id = book.Details.Title}, book);
         }
 
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, Product bookIn)
         {
-            var product = _productService.Get(id);
+            var product = _productRepository.Get(id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            _productService.Update(id, bookIn);
+            _productRepository.Update(id, bookIn);
 
             return NoContent();
         }
@@ -63,13 +63,13 @@ namespace Tita_Api.Controllers
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var product = await _productService.Get(id);
+            var product = await _productRepository.Get(id);
 
             if (product == null)
             {
                 return NotFound();
             }
-            _productService.Remove(product.Details.Title);
+            _productRepository.Remove(product.Details.Title);
             return NoContent();
         }
     }

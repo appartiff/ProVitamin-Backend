@@ -2,17 +2,16 @@
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Entities;
-using Domain.Entities.Product;
 using MongoDB.Driver;
 using Persistence.Configurations;
 
 namespace Persistence.Repositories
 {
-    public class BrandService : IBrandService
+    public class BrandRepository : IBrandRepository
     {
         private readonly IMongoCollection<Brand> _brands;
         
-        public BrandService(IProvitaminDatabaseSettings settings)
+        public BrandRepository(IProvitaminDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);

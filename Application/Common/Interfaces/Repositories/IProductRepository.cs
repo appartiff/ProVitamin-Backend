@@ -4,7 +4,7 @@ using Domain.Entities.Product;
 
 namespace Application.Common.Interfaces.Repositories
 {
-    public interface IProductService
+    public interface IProductRepository
     {
 
         Task<List<Product>>  Get();

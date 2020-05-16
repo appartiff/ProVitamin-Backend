@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Application.Common.Interfaces
 {
-    public interface IBrandService
+    public interface IBrandRepository
     {
         Task<List<Brand>> Get();
         Task<Brand> Get(string title);

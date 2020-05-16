@@ -7,11 +7,11 @@ using Persistence.Configurations;
 
 namespace Persistence.Repositories
 {
-    public class ProductService : IProductService
+    public class ProductRepository : IProductRepository
     {
         private readonly IMongoCollection<Product> _products;
 
-        public ProductService(IProvitaminDatabaseSettings settings)
+        public ProductRepository(IProvitaminDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
