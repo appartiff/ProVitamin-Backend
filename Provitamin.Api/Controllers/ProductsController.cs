@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces.Repositories;
+using Application.Products.Queries;
 using Domain.Entities.Product;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Tita_Api.Controllers
@@ -11,10 +14,11 @@ namespace Tita_Api.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
-
-        public ProductsController(IProductRepository productRepository)
+        private readonly IMediator _mediator;
+        public ProductsController(IProductRepository productRepository,IMediator mediator)
         {
             _productRepository = productRepository;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         [HttpGet]
@@ -23,16 +27,14 @@ namespace Tita_Api.Controllers
            return await _productRepository.Get();
         } 
 
-        [HttpGet("{id:length(24)}", Name = "GetProducts")]
+        [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Product>> Get(string id)
         {
-            var product = await _productRepository.Get(id);
-
-            if (product == null)
-            {
+            var product = await _mediator.Send(new GetAllProductsQuery());
+            if (product == null) {
                 return NotFound();
             }
-            return  product;
+            return Ok(product);
         }
 
         [HttpPost]

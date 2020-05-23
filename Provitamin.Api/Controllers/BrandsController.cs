@@ -21,7 +21,7 @@ namespace Tita_Api.Controllers
             return await _brandRepository.Get();
         } 
         
-        [HttpPost( Name = "create")]
+        [HttpPost]
         public async Task<ActionResult<Brand>> Create([FromBody]Brand brand)
         {
             if (string.IsNullOrEmpty(brand.Title) )

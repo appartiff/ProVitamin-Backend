@@ -15,13 +15,13 @@ namespace Tita_Api.Controllers
         {
             _categoryRepository = categoryRepository;
         }
-        [HttpGet(Name ="get")]
+        [HttpGet]
         public async Task<ActionResult<List<Category>>>  Get()
         {
             return await _categoryRepository.Get();
         } 
         
-        [HttpPost( Name = "create")]
+        [HttpPost]
         public async Task<ActionResult<Category>> Create([FromBody]Category brand)
         {
             if (string.IsNullOrEmpty(brand.Title) )
