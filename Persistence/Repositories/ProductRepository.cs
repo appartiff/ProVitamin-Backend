@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces.Repositories;
 using Domain.Entities.Product;
@@ -23,9 +24,9 @@ namespace Persistence.Repositories
         
         public async Task<List<Product>> Get() => await _products.FindAsync(book => true).Result.ToListAsync();
         public async Task<Product> Get(string id) => await _products.FindAsync(book => book.Details.Title == id).Result.FirstOrDefaultAsync();
-        public Product Create(Product book)
+        public async Task<Product> Create(Product book, CancellationToken cancellationToken)
         {
-            _products.InsertOne(book);
+            await _products.InsertOneAsync(book,cancellationToken);
             return book;
         }
         public void Update(string id, Product bookIn) => _products.ReplaceOne(book => book.Details.Title == id, bookIn);

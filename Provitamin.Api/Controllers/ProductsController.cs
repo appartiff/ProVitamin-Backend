@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces.Repositories;
+using Application.Products.Commands;
 using Application.Products.Queries;
+using Application.Products.Queries.GetAllProducts;
+using Application.Products.Queries.GetProduct;
 using Domain.Entities.Product;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +27,17 @@ namespace Tita_Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Product>>>  Get()
         {
-           return await _productRepository.Get();
+            var product = await _mediator.Send(new GetAllProductsQuery());
+            if (product == null) {
+                return NotFound();
+            }
+            return Ok(product);
         } 
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Product>> Get(string id)
         {
-            var product = await _mediator.Send(new GetAllProductsQuery());
+            var product = await _mediator.Send(new GetProductQuery(){Id=id});
             if (product == null) {
                 return NotFound();
             }
@@ -38,12 +45,10 @@ namespace Tita_Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Product> Create([FromBody]Product book)
+        public async Task<ActionResult<Product>> Create([FromBody]CreateProductCommand product)
         {
-            if (string.IsNullOrEmpty(book.Sku) )
-                return BadRequest();
-            _productRepository.Create(book);
-            return CreatedAtAction("Get", new {id = book.Details.Title}, book);
+            var result= await _mediator.Send(product);
+            return Ok(result);
         }
 
         [HttpPut("{id:length(24)}")]
