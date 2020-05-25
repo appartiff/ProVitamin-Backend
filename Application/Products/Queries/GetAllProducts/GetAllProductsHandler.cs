@@ -6,7 +6,7 @@ using Application.Common.Interfaces.Repositories;
 using Domain.Entities.Product;
 using MediatR;
 
-namespace Application.Products.Queries
+namespace Application.Products.Queries.GetAllProducts
 {
     public class GetAllProductsHandler : IRequestHandler<GetAllProductsQuery, List<Product>>
     {
