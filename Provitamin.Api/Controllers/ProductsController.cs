@@ -17,11 +17,9 @@ namespace Tita_Api.Controllers
     [Route("api/[controller]/[action]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
         private readonly IMediator _mediator;
         public ProductsController(IProductRepository productRepository,IMediator mediator)
         {
-            _productRepository = productRepository;
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
