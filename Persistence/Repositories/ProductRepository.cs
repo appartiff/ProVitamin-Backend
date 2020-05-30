@@ -22,16 +22,33 @@ namespace Persistence.Repositories
             _products.Indexes.CreateOne(indexModel);
         }
         
-        public async Task<List<Product>> Get() => await _products.FindAsync(book => true).Result.ToListAsync();
-        public async Task<Product> Get(string id) => await _products.FindAsync(book => book.Details.Title == id).Result.FirstOrDefaultAsync();
+        public async Task<List<Product>> Get(CancellationToken cancellationToken)
+        {
+            return await _products.FindAsync(book => true).Result.ToListAsync();
+        }
+
+        public async Task<Product> Get(string id,CancellationToken cancellationToken) => await _products.FindAsync(book => book.Id == id).Result.FirstOrDefaultAsync();
         public async Task<Product> Create(Product book, CancellationToken cancellationToken)
         {
             await _products.InsertOneAsync(book,cancellationToken);
             return book;
         }
-        public void Update(string id, Product bookIn) => _products.ReplaceOne(book => book.Details.Title == id, bookIn);
-        
-        public void Remove(Product bookIn) => _products.DeleteOne(book => book.Details.Title == bookIn.Details.Title);
-        public void Remove(string id) => _products.DeleteOne(book => book.Details.Title == id);
+        public async Task<string> Update(Product productIn,CancellationToken cancellationToken)
+        {
+            await _products.ReplaceOneAsync(product => product.Id == productIn.Id, productIn);
+            return productIn.Id;
+        }
+
+        public async Task<string> Remove(Product productIn,CancellationToken cancellationToken)
+        {
+            await _products.DeleteOneAsync(product => product.Id == productIn.Id,cancellationToken);
+            return productIn.Id;
+        }
+
+        public async Task<string> Remove(string id,CancellationToken cancellationToken)
+        {
+           await _products.DeleteOneAsync(product => product.Id == id,cancellationToken);
+           return id;
+        }
     }
 }

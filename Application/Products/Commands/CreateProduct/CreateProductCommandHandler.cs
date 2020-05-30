@@ -4,7 +4,7 @@ using Application.Common.Interfaces.Repositories;
 using Domain.Entities.Product;
 using MediatR;
 
-namespace Application.Products.Commands
+namespace Application.Products.Commands.CreateProduct
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, string>
     {

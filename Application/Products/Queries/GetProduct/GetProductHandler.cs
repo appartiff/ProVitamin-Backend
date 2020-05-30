@@ -16,7 +16,7 @@ namespace Application.Products.Queries.GetProduct
         }
         public async Task<Product> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.Get(request.Id);
+            var product = await _productRepository.Get(request.Id,cancellationToken);
             if (product == null)
                 throw new NotFoundException(nameof(product), request);
             return product;

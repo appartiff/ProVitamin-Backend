@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Common.Interfaces.Repositories;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,22 +25,22 @@ namespace Tita_Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Category>> Create([FromBody]Category brand)
         {
-            if (string.IsNullOrEmpty(brand.Title) )
+            if (string.IsNullOrEmpty(brand.id) )
                 return BadRequest();
             _categoryRepository.Create(brand);
-            return CreatedAtAction("Get", new { title = brand.Title}, brand);
+            return CreatedAtAction("Get", new { title = brand.id}, brand);
         }
         
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody]Category brand)
+        public async Task<IActionResult> Delete(Category brand)
         {
-            var product = await _categoryRepository.Get(brand.Title);
+            var product = await _categoryRepository.Get(brand.Id);
 
             if (product == null)
             {
                 return NotFound();
             }
-            _categoryRepository.Remove(brand.Title);
+            _categoryRepository.Remove(brand.Id);
             return NoContent();
         }
     }

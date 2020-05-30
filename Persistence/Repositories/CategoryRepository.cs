@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Common.Interfaces.Repositories;
 using Domain.Entities;
 using MongoDB.Driver;
 using Persistence.Configurations;
@@ -17,17 +18,17 @@ namespace Persistence.Repositories
             var database = client.GetDatabase(settings.DatabaseName);
             _categories = database.GetCollection<Category>(settings.BrandsCollectionName);
             var notificationLogBuilder = Builders<Category>.IndexKeys;
-            var indexModel = new CreateIndexModel<Category>(notificationLogBuilder.Ascending(x => x.Title),new CreateIndexOptions(){Unique = true});
+            var indexModel = new CreateIndexModel<Category>(notificationLogBuilder.Ascending(x => x.id),new CreateIndexOptions(){Unique = true});
             _categories.Indexes.CreateOne(indexModel);
         }
         
         public async Task<List<Category>> Get() => await _categories.FindAsync(brand => true).Result.ToListAsync();
-        public async Task<Category> Get(string title) => await _categories.FindAsync(brand => brand.Title == title).Result.FirstOrDefaultAsync();
+        public async Task<Category> Get(string id) => await _categories.FindAsync(brand => brand.Id == id).Result.FirstOrDefaultAsync();
         public Category Create(Category category)
         {
             _categories.InsertOne(category);
             return category;
         }
-        public void Remove(string title) => _categories.DeleteOne(book => book.Title == title);
+        public void Remove(string id) => _categories.DeleteOne(book => book.id == id);
     }
 }

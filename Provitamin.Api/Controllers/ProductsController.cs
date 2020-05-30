@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces.Repositories;
-using Application.Products.Commands;
+using Application.Products.Commands.CreateProduct;
+using Application.Products.Commands.DeleteProduct;
+using Application.Products.Commands.UpdateProduct;
 using Application.Products.Queries;
 using Application.Products.Queries.GetAllProducts;
 using Application.Products.Queries.GetProduct;
@@ -12,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Tita_Api.Controllers
 {
-
     [Route("api/[controller]/[action]")]
     public class ProductsController : ControllerBase
     {
@@ -28,14 +29,14 @@ namespace Tita_Api.Controllers
         public async Task<ActionResult<List<Product>>>  Get()
         {
             var product = await _mediator.Send(new GetAllProductsQuery());
-            if (product == null) {
+            if (product == null)
                 return NotFound();
-            }
+     
             return Ok(product);
         } 
 
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Product>> Get(string id)
+        public async Task<ActionResult<Product>> Get([FromBody]string id)
         {
             var product = await _mediator.Send(new GetProductQuery(){Id=id});
             if (product == null) {
@@ -51,31 +52,23 @@ namespace Tita_Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Product bookIn)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody]Product bookIn)
         {
-            var product = _productRepository.Get(id);
-
+            var product = await _mediator.Send(new GetProductQuery(){Id=bookIn.Id});
             if (product == null)
-            {
                 return NotFound();
-            }
-
-            _productRepository.Update(id, bookIn);
-
+            await _mediator.Send(new UpdateProductCommand() {Product = product});
             return NoContent();
         }
 
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var product = await _productRepository.Get(id);
-
+            var product = await _mediator.Send(new GetProductQuery(){Id=id});
             if (product == null)
-            {
                 return NotFound();
-            }
-            _productRepository.Remove(product.Details.Title);
+            await _mediator.Send(new DeleteProductCommand() {Id = id});
             return NoContent();
         }
     }

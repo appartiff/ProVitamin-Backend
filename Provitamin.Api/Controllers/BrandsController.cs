@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Common.Interfaces.Repositories;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace Tita_Api.Controllers
         {
             _brandRepository = brandRepository;
         }
-        [HttpGet(Name ="get")]
+        [HttpGet]
         public async Task<ActionResult<List<Brand>>>  Get()
         {
             return await _brandRepository.Get();
