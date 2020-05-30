@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Common.Interfaces;
 using Application.Common.Interfaces.Repositories;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -37,9 +36,8 @@ namespace Tita_Api.Controllers
             var product = await _categoryRepository.Get(brand.Id);
 
             if (product == null)
-            {
                 return NotFound();
-            }
+            
             _categoryRepository.Remove(brand.Id);
             return NoContent();
         }

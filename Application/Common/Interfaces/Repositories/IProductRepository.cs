@@ -14,6 +14,7 @@ namespace Application.Common.Interfaces.Repositories
         Task<string> Update(Product productIn, CancellationToken cancellationToken);
         Task<string> Remove(Product product, CancellationToken cancellationToken);
         Task<string> Remove(string id, CancellationToken cancellationToken);
-      
+
+        Task<bool> GetSku(string sku,CancellationToken cancellationToken);
     }
 }

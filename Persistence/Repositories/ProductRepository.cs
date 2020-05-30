@@ -28,6 +28,11 @@ namespace Persistence.Repositories
         }
 
         public async Task<Product> Get(string id,CancellationToken cancellationToken) => await _products.FindAsync(book => book.Id == id).Result.FirstOrDefaultAsync();
+       
+        public async Task<bool> GetSku(string sku,CancellationToken cancellationToken) {
+           return await _products.FindAsync(book => book.Sku == sku).Result.AnyAsync(cancellationToken);
+        } 
+        
         public async Task<Product> Create(Product book, CancellationToken cancellationToken)
         {
             await _products.InsertOneAsync(book,cancellationToken);
