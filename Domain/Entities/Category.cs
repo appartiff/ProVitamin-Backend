@@ -10,6 +10,6 @@ namespace Domain.Entities
         public string Id { get; set; }
         
         [BsonElement("title")]
-        public string id { get; set; }
+        public string Title { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Application.Common.Interfaces.Repositories
     {
         Task<List<Category>> Get();
         Task<Category> Get(string id);
-        Category Create(Category category);
-        void Remove(string id);
+        Task<Category> Create(Category category);
+        Task<Category> Remove(Category category);
     }
 }
